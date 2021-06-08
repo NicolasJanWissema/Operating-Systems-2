@@ -26,12 +26,3 @@ run:
 
 saferun:
 	java -cp $(CLASSPATH) SafetyCheckRun $(ARGS)
-
-docs:
-	javadoc -cp $(CLASSPATH) - $(DOCDIR) $(SRCDIR)/*.java
-
-clean:
-	rmdir -r $(BINDIR)
-
-cleandocs:
-	rm $(DOCDIR)/*
