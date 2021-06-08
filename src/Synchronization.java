@@ -16,7 +16,6 @@ public class Synchronization extends RunSimulation{
                 System.out.println("Exiting program.");
                 System.exit(0);
             }
-            System.out.println("Code successfully finished.");
         }
         else{
             System.out.println("Incorrect argument syntax. input: 'make run ARGS=\"<no_hydrogens> <no_carbons>\"'");

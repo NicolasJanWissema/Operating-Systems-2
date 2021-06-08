@@ -1,5 +1,7 @@
 package molecule;
 
+import java.awt.*;
+
 public class Carbon extends Thread {
 	
 	private static int carbonCounter =0;
@@ -15,8 +17,20 @@ public class Carbon extends Thread {
 	public void run() {
 	    try {	 
 	    	 // TODO: you will need to fix below
-	    	System.out.println("---Group ready for bonding---");	
-	    	sharedPropane.bond("C"+ this.id);  //bond   	   	 
+			sharedPropane.barrier.b_wait();
+			boolean unused=true;
+			while(unused){
+				sharedPropane.mutex.acquire();
+				if (sharedPropane.getHydrogen()==0 && sharedPropane.getCarbon()==0){
+					System.out.println("---Group ready for bonding---");
+				}
+				if (sharedPropane.getCarbon()<3){
+					unused=false;
+					sharedPropane.addCarbon();
+					sharedPropane.bond("C"+ this.id);
+				}
+				sharedPropane.mutex.release();
+			}
 	    }
 	    catch (InterruptedException ex) { /* not handling this  */}
 	   // System.out.println(" ");

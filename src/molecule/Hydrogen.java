@@ -17,8 +17,20 @@ public class Hydrogen extends Thread {
 	public void run() {
 	    try {
 	    	 // TODO: you will need to fix below
-	    	System.out.println("---Group ready for bonding---");			 
-	    	sharedPropane.bond("H"+ this.id);
+			sharedPropane.barrier.b_wait();
+			boolean unused=true;
+			while(unused){
+				sharedPropane.mutex.acquire();
+				if (sharedPropane.getHydrogen()==0 && sharedPropane.getCarbon()==0){
+					System.out.println("---Group ready for bonding---");
+				}
+				if (sharedPropane.getHydrogen()<8){
+					unused=false;
+					sharedPropane.addHydrogen();
+					sharedPropane.bond("H"+ this.id);
+				}
+				sharedPropane.mutex.release();
+			}
 	    }
 	   catch (InterruptedException ex) { /* not handling this  */}
 	    //System.out.println(" ");
