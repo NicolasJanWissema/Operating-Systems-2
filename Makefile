@@ -21,8 +21,8 @@ CLASS_FILES=$(CLASSES:%.class=$(SRCDIR)/%.class)
 
 default: $(CLASS_FILES)
 
-run:
-	java -cp $(CLASSPATH) Synchronization $(ARG)
+run: $(CLASS_FILES)
+	java -cp $(CLASSPATH) Synchronization $(ARGS)
 
 docs:
 	javadoc -cp $(CLASSPATH) - $(DOCDIR) $(SRCDIR)/*.java
@@ -32,6 +32,3 @@ clean:
 
 cleandocs:
 	rm $(DOCDIR)/*
-
-cleandata:
-	rm  ChatService.db
