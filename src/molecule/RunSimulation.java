@@ -12,12 +12,12 @@ public class RunSimulation {
 	public static void main(String[] args) {
 		int no_hydrogens = Integer.parseInt(args[0]);
 		int no_carbons = Integer.parseInt(args[1]);
-		
-		/**
-		 * TODO: Implement some form of error checking to ensure that no
-		 *       atoms will be left waiting after the propane molecules
-		 *       are created. Don't touch anything else in this file.
-		 */
+
+		if (no_hydrogens%8!=0 || no_carbons%3!=0 || no_hydrogens/8!=no_carbons/3){
+			System.out.println("Current input values, no_hydrogens="+no_hydrogens+" and no_carbons="+no_carbons+", leave remainder atoms during propane reaction.");
+			System.out.println("Exiting program.");
+			System.exit(0);
+		}
 		
 
 		System.out.println("Starting simulation with "+no_hydrogens+" H and "+no_carbons + " C");
