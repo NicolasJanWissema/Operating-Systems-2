@@ -22,13 +22,16 @@ CLASS_FILES=$(CLASSES:%.class=$(SRCDIR)/%.class)
 default: $(CLASS_FILES)
 
 run:
+	java -cp $(CLASSPATH) molecule/RunSimulation $(ARGS)
+
+saferun:
 	java -cp $(CLASSPATH) SafetyCheckRun $(ARGS)
 
 docs:
 	javadoc -cp $(CLASSPATH) - $(DOCDIR) $(SRCDIR)/*.java
 
 clean:
-	rm $(BINDIR)/*.class
+	rmdir -r $(BINDIR)
 
 cleandocs:
 	rm $(DOCDIR)/*
