@@ -15,15 +15,17 @@ public class Carbon extends Thread {
 	}
 	
 	public void run() {
-	    try {	 
-	    	 // TODO: you will need to fix below
-			//creates permits for 3 carbon atoms
+	    try {
+			//creates permits for 3 carbon atoms after all carbon atoms have been generated.
 			if (id==carbonCounter){
 				sharedPropane.carbonQ.release(3);
 			}
+			//3 carbon atom threads continue. Others wait for current propane bonding to finish.
 			sharedPropane.carbonQ.acquire();
+			//wait for 3 carbon and 8 hydrogen atoms to become available for bonding.
 			sharedPropane.barrier.b_wait();
 
+			//bond atoms to make propane molecule. Using mutex to maintain thread safety.
 			sharedPropane.mutex.acquire();
 			if (sharedPropane.getCarbon()==0 && sharedPropane.getHydrogen()==0){
 				System.out.println("---Group ready for bonding---");
@@ -32,6 +34,7 @@ public class Carbon extends Thread {
 			sharedPropane.bond("C"+ this.id);
 			sharedPropane.mutex.release();
 
+			//allow new atom to prepare for bonding process.
 			sharedPropane.carbonQ.release();
 	    }
 	    catch (InterruptedException ex) { /* not handling this  */}

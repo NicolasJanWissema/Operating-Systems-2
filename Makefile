@@ -2,7 +2,7 @@ JFLAGS = -g -d $(BINDIR)/ -cp $(BINDIR)
 CLASSPATH = $(BINDIR)
 SRCDIR=src
 BINDIR=bin
-DOCDIR=doc
+DOCDIR=docs
 
 .SUFFIXES: .java .class
 
@@ -15,14 +15,14 @@ CLASSES= molecule/BarrierReusable.class \
 	molecule/Carbon.class \
 	molecule/Hydrogen.class \
 	molecule/RunSimulation.class \
-	Synchronization.class
+	SafetyCheckRun.class
 
 CLASS_FILES=$(CLASSES:%.class=$(SRCDIR)/%.class)
 
 default: $(CLASS_FILES)
 
-run: $(CLASS_FILES)
-	java -cp $(CLASSPATH) Synchronization $(ARGS)
+run:
+	java -cp $(CLASSPATH) SafetyCheckRun $(ARGS)
 
 docs:
 	javadoc -cp $(CLASSPATH) - $(DOCDIR) $(SRCDIR)/*.java

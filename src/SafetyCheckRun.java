@@ -1,9 +1,10 @@
-import molecule.*;
+import molecule.RunSimulation;
 
-public class Synchronization extends RunSimulation{
-    /**
-     * This class is used for running RunSimulation. Checks the input argument is in correct format.
-     */
+/**
+ * This class is used for running RunSimulation with added syntax checks for testing. Checks the input argument is in correct format.
+ */
+public class SafetyCheckRun extends RunSimulation {
+
     public static void main(String[] args){
         if (args.length==2){
             try{
