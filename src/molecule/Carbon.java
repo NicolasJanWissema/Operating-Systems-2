@@ -17,20 +17,22 @@ public class Carbon extends Thread {
 	public void run() {
 	    try {	 
 	    	 // TODO: you will need to fix below
-			sharedPropane.barrier.b_wait();
-			boolean unused=true;
-			while(unused){
-				sharedPropane.mutex.acquire();
-				if (sharedPropane.getHydrogen()==0 && sharedPropane.getCarbon()==0){
-					System.out.println("---Group ready for bonding---");
-				}
-				if (sharedPropane.getCarbon()<3){
-					unused=false;
-					sharedPropane.addCarbon();
-					sharedPropane.bond("C"+ this.id);
-				}
-				sharedPropane.mutex.release();
+			//creates permits for 3 carbon atoms
+			if (id==carbonCounter){
+				sharedPropane.carbonQ.release(3);
 			}
+			sharedPropane.carbonQ.acquire();
+			sharedPropane.barrier.b_wait();
+
+			sharedPropane.mutex.acquire();
+			if (sharedPropane.getCarbon()==0 && sharedPropane.getHydrogen()==0){
+				System.out.println("---Group ready for bonding---");
+			}
+			sharedPropane.addCarbon();
+			sharedPropane.bond("C"+ this.id);
+			sharedPropane.mutex.release();
+
+			sharedPropane.carbonQ.release();
 	    }
 	    catch (InterruptedException ex) { /* not handling this  */}
 	   // System.out.println(" ");
