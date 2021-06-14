@@ -17,7 +17,7 @@ public class Carbon extends Thread {
 	public void run() {
 	    try {
 			//creates permits for 3 carbon atoms after all carbon atoms have been generated.
-			if (id==carbonCounter){
+			if (id==1){
 				sharedPropane.carbonQ.release(3);
 			}
 			//3 carbon atom threads continue. Others wait for current propane bonding to finish.

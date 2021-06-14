@@ -17,7 +17,7 @@ public class Hydrogen extends Thread {
 	public void run() {
 	    try {
 			//creates permits for 8 hydrogen atoms after all hydrogen atoms have been generated.
-			if (id==hydrogenCounter){
+			if (id==1){
 				sharedPropane.hydrogensQ.release(8);
 			}
 			//8 hydrogen atom threads continue. Others wait for current propane bonding to finish.
