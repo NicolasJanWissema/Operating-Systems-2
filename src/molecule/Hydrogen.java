@@ -2,14 +2,14 @@ package molecule;
 
 public class Hydrogen extends Thread {
 
-	private static int carbonCounter =0;
+	private static int hydrogenCounter =0;
 	private int id;
 	private Propane sharedPropane;
 	
 	
 	public Hydrogen(Propane propane_obj) {
-		Hydrogen.carbonCounter+=1;
-		id=carbonCounter;
+		Hydrogen.hydrogenCounter+=1;
+		id=hydrogenCounter;
 		this.sharedPropane = propane_obj;
 		
 	}
@@ -17,7 +17,7 @@ public class Hydrogen extends Thread {
 	public void run() {
 	    try {
 			//creates permits for 8 hydrogen atoms after all hydrogen atoms have been generated.
-			if (id==carbonCounter){
+			if (id==hydrogenCounter){
 				sharedPropane.hydrogensQ.release(8);
 			}
 			//8 hydrogen atom threads continue. Others wait for current propane bonding to finish.
